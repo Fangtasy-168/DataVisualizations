@@ -37,7 +37,7 @@ d3.json('https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
         let maxY = d3.max(GDP)
         let Yscale = d3
             .scaleLinear()
-            .domain([padding, maxY])
+            .domain([0, maxY])
             .range([height - padding, padding])
 
         svgContainer
@@ -53,14 +53,14 @@ d3.json('https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
         svgContainer
             .append("g")
             .call(xAxis)
-            .attr("id", "x-Axis")
+            .attr("id", "x-axis")
             .attr("transform", "translate(0," + (height - padding) + ")")
 
         let yAxis = d3.axisLeft().scale(Yscale)
         svgContainer
             .append("g")
             .call(yAxis)
-            .attr("id", "y-Axis")
+            .attr("id", "y-axis")
             .attr("transform", "translate(" + padding + ",0)")
 
         svgContainer.selectAll("rect")
@@ -73,6 +73,8 @@ d3.json('https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
             .attr("y", (d, i) => Yscale(d[1]))
             .attr("fill", "#20b2aa")
             .attr("class", "bar")
+            .attr("data-date", (d, i) => d[0])
+            .attr("data-gdp", (d, i) => d[1])
             .on("mouseover", function (e, d) {
                 let [x, y] = d3.pointer(e, svgContainer.node())
                 y -= height
@@ -85,6 +87,7 @@ d3.json('https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
                 let value = Number(d[1]).toLocaleString()
                 tooltip
                     .style("opacity", ".8")
+                    .attr("data-date", d[0])
                     .html(`${year} ${quarter} <br> $${value} Billion`)
                     .transition()
                     .duration(0)
