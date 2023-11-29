@@ -46,6 +46,7 @@ d3.json('https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
             .attr("x", "-250")
             .attr("y", "100")
             .attr("font-size", ".8rem")
+            .attr("fill", "white")
             .text(moddedtext)
 
 
@@ -86,12 +87,12 @@ d3.json('https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
                             (splitDate[1] == "10") ? "Q4" : null
                 let value = Number(d[1]).toLocaleString()
                 tooltip
-                    .style("opacity", ".8")
                     .attr("data-date", d[0])
                     .html(`${year} ${quarter} <br> $${value} Billion`)
-                    .transition()
-                    .duration(0)
                     .style("transform", `translate(${x + 15}px,${y - 50}px)`)
+                    .transition()
+                    .duration(200)
+                    .style("opacity", ".8")
             })
             .on("mouseout", function () {
                 tooltip
