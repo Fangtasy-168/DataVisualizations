@@ -138,7 +138,7 @@ d3.json(url)
             .append("g")
             .attr("class", "legend-label")
             .attr("transform", function (d, i) {
-                return `translate(0, ${i * 20})`
+                return `translate(0, ${i * 25})`
             })
             .append("rect")
             .attr("height", "20px")
