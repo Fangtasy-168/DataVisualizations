@@ -148,20 +148,24 @@ d3.json(workingSet.file)
 
         // console.log(uniqueCategories);
 
+
         const legendCategories = legend
             .selectAll("g")
             .data(categoriesList)
             .enter()
             .append("g")
+            .attr("class", "legend-item")
             .attr("transform", (d, i) => {
-                let step = legendW / (categoriesList.length / 6)
-                let breaks = legendH / (categoriesList.length / 3)
+                let step = (legendW - 20) / 3
+                let breaks = (legendH - 20) / (categoriesList.length / 3)
                 let x = step * (i % 3) + 10
                 let y = Math.floor((i / 3)) * breaks
 
                 return `translate(${x},${y})`
-
             })
+
+
+
         legendCategories
             .append("rect")
             .attr("class", "legend-item")
